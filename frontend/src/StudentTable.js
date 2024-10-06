@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './StudentTable.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const StudentTable = () => {
   const [data, setData] = useState([]);
@@ -61,21 +63,23 @@ const StudentTable = () => {
     <div className="table-container">
       <h1>Student Data</h1>
       
-      <form onSubmit={editingStudent ? handleUpdateStudent : handleAddStudent}>
-        <input 
-          type="text" 
-          placeholder="Name" 
-          value={newStudent.name} 
-          onChange={(e) => setNewStudent({ ...newStudent, name: e.target.value })} 
-          required 
-        />
-        <input 
-          type="text" 
-          placeholder="Department" 
-          value={newStudent.dept} 
-          onChange={(e) => setNewStudent({ ...newStudent, dept: e.target.value })} 
-          required 
-        />
+      <form onSubmit={editingStudent ? handleUpdateStudent : handleAddStudent} className="input-form">
+        <div className="input-box">
+          <input 
+            type="text" 
+            placeholder="Name" 
+            value={newStudent.name} 
+            onChange={(e) => setNewStudent({ ...newStudent, name: e.target.value })} 
+            required 
+          />
+          <input 
+            type="text" 
+            placeholder="Department" 
+            value={newStudent.dept} 
+            onChange={(e) => setNewStudent({ ...newStudent, dept: e.target.value })} 
+            required 
+          />
+        </div>
         <button type="submit">{editingStudent ? 'Update Student' : 'Add Student'}</button>
         {editingStudent && <button type="button" onClick={() => { setEditingStudent(null); setNewStudent({ name: '', dept: '' }); }}>Cancel</button>}
       </form>
@@ -90,17 +94,21 @@ const StudentTable = () => {
           </tr>
         </thead>
         <tbody>
-            {data.map((item) => (
-                <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.dept}</td>
-                <td className="actions">
-                    <button onClick={() => handleEditStudent(item)}>Edit</button>
-                    <button onClick={() => handleDeleteStudent(item.id)}>Delete</button>
-                </td>
-                </tr>
-            ))}
+          {data.map((item) => (
+            <tr key={item.id}>
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{item.dept}</td>
+              <td className="actions">
+                <button onClick={() => handleEditStudent(item)}>
+                  <FontAwesomeIcon icon={faEdit} />
+                </button>
+                <button onClick={() => handleDeleteStudent(item.id)}>
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

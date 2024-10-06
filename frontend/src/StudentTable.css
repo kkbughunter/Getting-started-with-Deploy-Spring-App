@@ -13,10 +13,15 @@ h1 {
   color: #333; /* Dark grey for the heading */
 }
 
-form {
+.input-form {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+}
+
+.input-box {
+  display: flex;
+  gap: 10px; /* Space between input fields */
 }
 
 input {
@@ -25,6 +30,7 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
   transition: border-color 0.3s;
+  flex: 1; /* Make inputs take available space */
 }
 
 input:focus {
@@ -76,4 +82,11 @@ button:hover {
 .actions {
   display: flex;
   gap: 10px; /* Space between action buttons */
+}
+
+.actions button {
+  background: none; /* Remove background */
+  border: none; /* Remove border */
+  color: red; /* Green color for icons */
+  cursor: pointer; /* Change cursor to pointer */
 }
